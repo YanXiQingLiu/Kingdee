@@ -1,0 +1,10 @@
+linux 
+    压缩命令： 
+                 tar -czvf/新压缩包存放目录/新压缩包文件名.tar.gz /kingdee(原压缩文件名)
+                 tar -czvf/tmp/EAS1117.tar.gz /kingdee(原压缩文件名)
+
+
+    解压命令：
+		             tar -xzvf /tmp/etc.tar.gz -C /
+                 
+                 
