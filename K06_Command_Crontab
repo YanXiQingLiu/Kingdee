@@ -6,5 +6,6 @@ linux
 
     解压命令：
 		             tar -xzvf /tmp/etc.tar.gz -C /
-                 
+
+
                  
