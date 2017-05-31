@@ -8,4 +8,10 @@ linux
 		             tar -xzvf /tmp/etc.tar.gz -C /
 
 
+crontab -e
+*/3 * * * * top -b -n 3 -d 1 -p 28442,29573,29307,28758,29844,29045,15209 >> /bak/top/201705091000top.txt                                                                                     
+*/3 * * * * date >> /bak/top/201705091000top.txt
+*/3 * * * * df -hl >> /bak/top/201705091000df-hl.txt
+*/3 * * * * date >> /bak/top/201705091000df-hl.txt
+
                  
