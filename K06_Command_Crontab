@@ -15,3 +15,5 @@ crontab -e
 */3 * * * * date >> /bak/top/201705091000df-hl.txt
 
                  
+vncserver :2
+vncserver -kill :2
