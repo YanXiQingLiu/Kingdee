@@ -1,0 +1,48 @@
+Logfile:备份时产生的日志文件，记录备份明细内容与相关报错信息。
+Tables:如果要单独导表，则为表名，多表中间用逗号隔开。
+Excludes:排除，即排除某些表不用导出。
+Parallel:并行，即导出或导入数据时用的并行线程或CPU个数。
+Remap_schema:重定向方案，即导入的方案名称与导出的不一样时进行转换处理。
+Remap_tablespace:重定向表空间，即导入的表空间名称与导出的不一样时转换处理。
+
+一、expdp导出数据前做的准备工作:
+备份前的准备工作(查原库的默认永久表空间、临时表空间以及对应表空间的大小,便于在导入库中也建相同的表空间及对应大小的数据文件)：
+用sys用户登陆原数据库，即要导出EAS账套的数据库有些客户如EAS账套名权限较大，也可以用EAS账套名登录。
+1.查看EAS账套名称对应的默认数据表空间与临时表空间:
+select default_tablespace,temporary_tablespace from dba_users where username=upper('EAS75')     --EAS75为EAS账套名，最好写成大写
+
+2.查看导入原账套数据表空间名称及占用大小:
+select f.tablespace_name,a.total,u.used,f.free,round((u.used/a.total)*100) "% used",
+    round((f.free/a.total)*100) "% Free" 
+  from
+    (select tablespace_name, sum(bytes/(1024*1024)) total 
+    from dba_data_files group by tablespace_name) a,  (select        tablespace_name, round(sum(bytes/(1024*1024))) used    
+ from dba_extents group by tablespace_name) u,
+(select tablespace_name, round(sum(bytes/(1024*1024))) free 
+    from dba_free_space group by tablespace_name) f
+WHERE a.tablespace_name = f.tablespace_name
+and a.tablespace_name = u.tablespace_name;
+
+3.查看导入原账套临时表空间名称及占用大小:
+Select d.tablespace_name,Space "Sum_space(M)",blocks sum_blocks,used_space "Used_space(M)",
+       round(nvl(used_space,0)/Space*100,2) "Used_rate(%)",nvl(free_space,0) "Free_space(M)"
+From (Select tablespace_name,round(Sum(bytes)/(1024*1024),2) Space,Sum(blocks) blocks From dba_temp_files Group By tablespace_name) d,
+(Select tablespace_name,round(Sum(bytes_used)/(1024*1024),2) used_space,round(Sum(bytes_free)/(1024*1024),2) free_space
+From v$temp_space_header Group By tablespace_name) f
+Where d.tablespace_name=f.tablespace_name(+)  
+order by 5 desc;
+
+二、expdp导出数据：
+1.设置客户端环境变量：
+windows操作系统先运行：
+C:\>set NLS_LANG=AMERICAN_AMERICA.UTF8
+非WINDOWS操作系统先运行：
+$export NLS_LANG=AMERICAN_AMERICA.UTF8
+
+2.用sys用户登陆数据库创建数据库虚目录tempdir（备份文件存放在如：E:\backup 目录下，建一个实际存在的目录，以现场所建的为准），并给虚目录进行赋权：
+sql>create directory tempdir as 'E:\backup';
+sql>grant read,write on directory tempdir to system;
+
+3.对eas75账套数据进行数据泵导出（排除VT表与统计分析信息不导出)：
+c:\> expdp system/kdlsys schemas=eas75 directory=tempdir dumpfile=easexp_20140516.dmp logfile=easexp_20140516.log   
+     exclude=table:\"like \'VT%\'\",statistics parallel=2

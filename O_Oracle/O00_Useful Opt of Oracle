@@ -1,0 +1,76 @@
+exp                客户端工具
+expdp             服务端工具
+expdp help=y  帮助命令
+directory         导出目录逻辑名
+
+--查询默认数据泵目录
+select * from dba_directories
+where directory_name='DATA_PUMP_DIR';
+
+--修改默认数据泵目录
+create or replace directory data_pump_dir as '/u01/app/oracle/admin/test10g/dpdump/';
+
+--查看导出逻辑目录
+select * from all_directories;
+select * from dba_directories;
+
+--创建导出逻辑目录 dump_exp
+create directory dump_exp as '/u01/dump_dbtest';
+如果不指定路径，则用默认路径
+
+--删除导出逻辑目录 dump_exp
+drop directory dump_exp
+
+--给hr用户授予目录dump_exp读写权限
+grant read,write on directory dump_exp to hr;
+
+--导出hr用户下的3张表 employees,departments,jobs
+expdp hr/hr tables=employees,departments,jobs 
+dumpfile=hr20120811.dmp 
+logfile=hr20120811.log 
+directory=dump_exp
+
+--导出表的一部分
+expdp hr/hr tables=employees 
+dumpfile=hr20120811.dmp 
+logfile=hr20120811.log 
+directory=dump_exp 
+query='"where employee_id between 200 and 206"'
+
+--指定类型指定对象(模糊查询表 ：em开头的)
+expdp hr/hr dumpfile=include_1.dmp logfile=include_1.log 
+directory=dump_exp 
+include=table:\"like \'EM%\'\"
+
+--导出存储过程
+expdp hr/hr schemas=hr dumpfile=include_4.dmp logfile=include_4.log directory=dump_exp 
+include=PROCEDURE
+除了TABLE以外的对象用 exclude=TABLE
+
+--导出用户
+expdp sys/manager@dbtest schemas=hr dumpfile=hr.dmp logfile=hr.log directory=dump_exp
+
+--导出表空间
+expdp sys/manager tablespaces=dumpspace directory=dump_exp dumpfile=dp.dmp logfile=dp.log
+
+--导出数据库
+expdp sys/manager full=y dumpfile=full.dmp logfile=full.log directory=dump_exp
+grant exp_full_database to hr;  (也可以给hr授权)
+
+
+--导入表
+将hr用户的employees表导入到自己用户下
+impdp sys/manager tables=hr.employees ignore=y directory=dump_exp dumpfile=employees.dmp
+
+将hr用户的employees表导入到ikki用户下
+impdp sys/manager tables=hr.employees ignore=ydirectory=dump_exp dumpfile=employees.dmp remapschema=hr:ikki
+
+--导入用户
+impdp sys/manager schemas=hr directory=dump_exp dumpfile=hr.dmp
+
+--导入表空间
+impdp sys/manager tablespace=dumpspace directory=dump_exp dumpfile=tbs_dp.dmp
+(如果表空间被删除，需要重新建立表空间)
+ 
+--全库导入（数据库结构必须完好，轻易不要导入数据库,建议部分导入）
+impdp sys/manager directory=dump_exp dumpfile=full.dmp full=y
