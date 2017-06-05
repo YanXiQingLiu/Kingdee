@@ -1,0 +1,21 @@
+1.
+select * from CT_BIL_DefferedIncomeLedger
+update CT_BIL_DefferedIncomeLedger set FIsVouchered='1' where FIsVouchered='0'  
+      //更换在递延台账序时簿界面更改生成凭证状态的语句（1是已生成凭证，0是未生成凭证）
+
+
+2.
+系统状态控制表：select * from T_BD_SystemStatusCtrol where fcompanyid=FStartPeriodID
+FStartPeriodID
+update T_BD_SystemStatusCtrol set fstartperiodid='s7EAAAAOkqCCOIxM' and fcurrentperiodid='s7EAAAAOkqCCOIxM' where fcompanyid='s7EAAAAAALbM567U'  //更换启用期间
+update T_BD_SystemStatusCtrol set fstartperiodid='s7EAAAAOkqCCOIxM' where fcompanyid='s7EAAAAAALbM567U'
+update T_BD_SystemStatusCtrol set fcurrentperiodid='s7EAAAAOkqCCOIxM' where fcompanyid='s7EAAAAAALbM567U'
+update T_BD_SystemStatusCtrol set frelatedperiodid='s7EAAAAOkqCCOIxM' where fid='s7EAAAAHJlGanDnS'  //改联用期间
+
+
+3.
+启用期间表：select * from T_BD_Period where fid ='s7EAAAAACNaCOIxM'
+
+
+4.组织机构表
+select * from T_ORG_BaseUnit where fid ='s7EAAAAAAh7M567U'
