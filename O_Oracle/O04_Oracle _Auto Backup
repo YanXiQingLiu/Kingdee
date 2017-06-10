@@ -13,3 +13,19 @@ echo 正在导出数据到 G:\ora_bak\eas%a%.dmp ......
 expdp system/system dumpfile=eas_expdp_%a%.dmp logfile=eas_expdp_%a%.log directory =dmp1 EXCLUDE=STATISTICS,table:\" like \'VT%\'\"  full=y
  
 end
+
+
+
+----------------------windows bat文件 备份oracle数据库 并压缩和删除文件---------------------------------------------------------------------------
+@echo off
+set filename=G:\ora_bak\%date:~3,2%%date:~6,2%
+set dumpfile=G:\ora_bak\agbpeas%date:~3,2%%date:~6,2%
+set dumpfile2=agbpeas%date:~3,2%%date:~6,2%
+
+set rarfile=G:\ora_bak\%date:~9,2%
+
+expdp system/system directory=dmp1 schemas=agbpeas dumpfile=%dumpfile2%.dmp logfile=%dumpfile2%.log
+del %rarfile%.rar
+rar a %rarfile%.rar %dumpfile%.*  -df
+
+------------------------------------------------------------------------------------------------------------
