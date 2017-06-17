@@ -1,0 +1,48 @@
+0
+create directory tempdir1 as '/home/oracle/test617TableSpace';
+
+1
+create temporary tablespace test617_NEW_EAS_T_GW_STANDARD tempfile '/home/oracle/test617TableSpace/test617_NEW_EAS_T_GW_STANDARD.ora' size 500m autoextend on next 500m maxsize UNLIMITED extent management local;
+
+2
+create tablespace test617_NEW_EAS_D_GW_STANDARD logging datafile '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD.ora' size 500m autoextend on next 500m maxsize UNLIMITED extent management local;
+
+ALTER TABLESPACE test617_NEW_EAS_D_GW_STANDARD ADD DATAFILE '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD1.ora' SIZE 500M AUTOEXTEND ON NEXT 500M MAXSIZE UNLIMITED;
+ALTER TABLESPACE test617_NEW_EAS_D_GW_STANDARD ADD DATAFILE '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD2.ora' SIZE 500M AUTOEXTEND ON NEXT 500M MAXSIZE UNLIMITED;
+ALTER TABLESPACE test617_NEW_EAS_D_GW_STANDARD ADD DATAFILE '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD3.ora' SIZE 500M AUTOEXTEND ON NEXT 500M MAXSIZE UNLIMITED;
+ALTER TABLESPACE test617_NEW_EAS_D_GW_STANDARD ADD DATAFILE '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD4.ora' SIZE 500M AUTOEXTEND ON NEXT 500M MAXSIZE UNLIMITED;
+ALTER TABLESPACE test617_NEW_EAS_D_GW_STANDARD ADD DATAFILE '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD5.ora' SIZE 500M AUTOEXTEND ON NEXT 500M MAXSIZE UNLIMITED;
+ALTER TABLESPACE test617_NEW_EAS_D_GW_STANDARD ADD DATAFILE '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD6.ora' SIZE 500M AUTOEXTEND ON NEXT 500M MAXSIZE UNLIMITED;
+ALTER TABLESPACE test617_NEW_EAS_D_GW_STANDARD ADD DATAFILE '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD7.ora' SIZE 500M AUTOEXTEND ON NEXT 500M MAXSIZE UNLIMITED;
+ALTER TABLESPACE test617_NEW_EAS_D_GW_STANDARD ADD DATAFILE '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD8.ora' SIZE 500M AUTOEXTEND ON NEXT 500M MAXSIZE UNLIMITED;
+ALTER TABLESPACE test617_NEW_EAS_D_GW_STANDARD ADD DATAFILE '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD9.ora' SIZE 500M AUTOEXTEND ON NEXT 500M MAXSIZE UNLIMITED;
+ALTER TABLESPACE test617_NEW_EAS_D_GW_STANDARD ADD DATAFILE '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD10.ora' SIZE 500M AUTOEXTEND ON NEXT 500M MAXSIZE UNLIMITED;
+ALTER TABLESPACE test617_NEW_EAS_D_GW_STANDARD ADD DATAFILE '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD11.ora' SIZE 500M AUTOEXTEND ON NEXT 500M MAXSIZE UNLIMITED;
+
+3
+create user test617 identified by test617 default tablespace test617_NEW_EAS_D_GW_STANDARD temporary tablespace test617_NEW_EAS_T_GW_STANDARD; 
+
+4
+grant connect,resource,dba to test617;
+
+5.
+chown oracle:oinstall /home/oracle/databak-0428/
+chown oracle:oinstall /home/oracle/databak-0428/
+chown oracle:oinstall /home/oracle/databak-0428/oracle0427.DMP 
+chown oracle:oinstall /home/oracle/databak-0428/oracle0427.log 
+
+6
+create directory backupdir as '/home/oracle/backup'
+
+7.导入
+impdp GW/gw schemas=gw directory=tempdir2 dumpfile=GWEAS0504.DMP logfile=gweas0504.log parallel=2;
+
+*导出与导入用户名不一样、表空间名不一样impdp导入数据方法（REMAP_SCHEMA=easuser_old:easuser_new，其中easuser_old原用户，easuser_new为新的用户）：
+c:\>impdp test617/test617 DIRECTORY=backupdir dumpfile=GW51_20170617.dmp REMAP_SCHEMA=GW51:test617 remap_tablespace=FIVE_NEW_EAS_D_GW_STANDARD:test617_NEW_EAS_D_GW_STANDARD logfile=GW51_20170617.log
+
+
+
+sql>create directory bakdir as '/home/oracle/OracleAutoBackUp';
+sql>grant read,write on directory bakdir to system;
+
+expdp system/system schemas=GW51 directory=backupdir dumpfile=easGW501_20170617.dmp logfile=easGW501_20170617.log exclude=table:\"like \'VT%\'\",statistics
