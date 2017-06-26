@@ -46,3 +46,19 @@ sql>grant read,write on directory tempdir to system;
 3.对eas75账套数据进行数据泵导出（排除VT表与统计分析信息不导出)：
 c:\> expdp system/kdlsys schemas=eas75 directory=tempdir dumpfile=easexp_20140516.dmp logfile=easexp_20140516.log   
      exclude=table:\"like \'VT%\'\",statistics parallel=2
+
+
+----------------------------遇到文件权限不足时---------------------------------------------------------------------
+            ORA-39002: invalid operation
+            ORA-39070: Unable to open the log file.
+            ORA-29283: invalid file operation
+            ORA-06512: at "SYS.UTL_FILE", line 536
+            ORA-29283: invalid file operation
+
+1.
+SQL> create directory backdir as '/home/oracle/oraclebackup';
+      grant read,write on directory backdir to EAS01;
+
+2.
+create or replace directory backdir as '/home/oracle/oraclebackup';  
+---------------------------------------------------------------------------------------------------------------
