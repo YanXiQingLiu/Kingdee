@@ -1,0 +1,25 @@
+
+
+SQL> startupORACLE instance started.
+Total System Global Area 2.6991E+10 bytes
+Fixed Size      2213976 bytes
+Variable Size   2.3354E+10 bytes
+Database Buffers  3489660928 bytes
+Redo Buffers    145174528 bytes
+
+Database mounted.ORA-01157: cannot identify/lock data file 66 - see DBWR trace file
+
+ORA-01110: data file 66:'/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD6.ora'
+
+
+----------------------------------------所有的表空间改为offline--------------------------
+alter database datafile '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD1.ora' offline drop;
+alter database datafile '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD2.ora' offline drop;
+alter database datafile '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD3.ora' offline drop;
+alter database datafile '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD4.ora' offline drop;
+alter database datafile '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD5.ora' offline drop;
+alter database datafile '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD6.ora' offline drop;
+alter database datafile '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD7.ora' offline drop;
+alter database datafile '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD8.ora' offline drop;
+alter database datafile '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD9.ora' offline drop;
+alter database datafile '/home/oracle/test617TableSpace/test617_NEW_EAS_D_GW_STANDARD10.ora' offline drop;
