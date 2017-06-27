@@ -1,0 +1,6 @@
+//查询语句
+select * from t_be_bankpayingbill where fnumber in('201706270147');
+
+
+//更新语句
+update t_be_bankpayingbill set fstate = 5,fbankreturninfo='sql后台修改' where fnumber in('201706270147');
