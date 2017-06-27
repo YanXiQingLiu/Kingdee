@@ -1,7 +1,8 @@
+
+1. for windows
+
 以下是 windows 批处理文件，保存在txt文档中
-
-
-
+------------------------------------------------------------------------------------------------------------------
 @echo on
 
 set d=%date:~0,4%%date:~5,2%%date:~8,2%
@@ -37,12 +38,28 @@ rar a %rarfile%.rar %dumpfile%.*  -df
 
 
 
+2. for linux
 
-
+------------------------------------------------------------------------------------------------------------------
 #!/bin/sh
-export ORACLE_BASE=/data/oracleexport ORACLE_HOME=$ORACLE_BASE/product/11.2.0/db_1export ORACLE_SID=orclexport PATH=$PATH:$HOME/bin:$ORACLE_HOME/bin:$ORACLE_HOME/bin:/usr/sbin:$PATH
-export DATA_DIR=/home/oracle/backupexport LOGS_DIR=/home/oracle/backupexport DELTIME=`date -d "7 days ago" +%Y%m%d`export BAKUPTIME=`date +%Y%m%d%H%M%S`
-mkdir -p $DATA_DIRmkdir -p $LOGS_DIR
-echo "Starting bakup..."echo "Bakup file path $DATA_DIR/$BAKUPTIME.dmp"expdp GW51/gw51 schemas=GW51 directory=backupdir dumpfile=GW51_$BAKUPTIME.dmp logfile=GW51_$BAKUPTIME.log exclude=table:\"like \'VT%\'\",statistics parallel=1
-echo "Delete the file bakup before 7 days..."rm -rf $DATA_DIR/GW51_$DELTIME*.dmprm -rf $LOGS_DIR/GW51_$DELTIME*.logecho "Delete the file bakup successfully. "
+export ORACLE_BASE=/data/oracle
+export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/db_1
+export ORACLE_SID=orcl
+export PATH=$PATH:$HOME/bin:$ORACLE_HOME/bin:$ORACLE_HOME/bin:/usr/sbin:$PATH
+export DATA_DIR=/home/oracle/backup
+export LOGS_DIR=/home/oracle/backup
+export DELTIME=`date -d "7 days ago" +%Y%m%d`
+export BAKUPTIME=`date +%Y%m%d%H%M%S`
+mkdir -p $DATA_DIR
+mkdir -p $LOGS_DIR
+echo "Starting bakup..."
+echo "Bakup file path $DATA_DIR/$BAKUPTIME.dmp"
+
+expdp GW51/gw51 schemas=GW51 directory=backupdir dumpfile=GW51_$BAKUPTIME.dmp logfile=GW51_$BAKUPTIME.log exclude=table:\"like \'VT%\'\",statistics parallel=1
+echo "Delete the file bakup before 7 days..."
+
+rm -rf $DATA_DIR/GW51_$DELTIME*.dmp
+rm -rf $LOGS_DIR/GW51_$DELTIME*.log
+echo "Delete the file bakup successfully. "
 echo "Bakup completed."
+------------------------------------------------------------------------------------------------------------------
