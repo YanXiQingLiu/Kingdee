@@ -38,3 +38,6 @@ logfile=easimp_20140516.log    parallel=2
 c:\>impdp system/kdlsys DIRECTORY=tempdir dumpfile=easexp_20140516.dmp
 REMAP_SCHEMA=easuser_old:easuser_new remap_tablespace=oldtablespace:newtablespace 
 logfile=impdb.log
+
+
+impdp test617/test617 DIRECTORY=databack dumpfile=GW51_20170627184552.dmp REMAP_SCHEMA=GW51:test617 remap_tablespace=FIVE_NEW_EAS_D_GW_STANDARD:test617_NEW_EAS_D_GW_STANDARD table_exists_action=replace logfile=GW51_20170627184552.log 
