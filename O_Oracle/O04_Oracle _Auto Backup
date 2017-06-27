@@ -43,8 +43,8 @@ export ORACLE_BASE=/data/oracle
 export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/db_1
 export ORACLE_SID=orcl
 export PATH=$PATH:$HOME/bin:$ORACLE_HOME/bin:$ORACLE_HOME/bin:/usr/sbin:$PATH
-export DATA_DIR=/home/oracle/backup
-export LOGS_DIR=/home/oracle/backup
+export DATA_DIR=/databack
+export LOGS_DIR=/databack
 export DELTIME=`date -d "7 days ago" +%Y%m%d`
 export BAKUPTIME=`date +%Y%m%d%H%M%S`
 mkdir -p $DATA_DIR
@@ -52,7 +52,7 @@ mkdir -p $LOGS_DIR
 echo "Starting bakup..."
 echo "Bakup file path $DATA_DIR/$BAKUPTIME.dmp"
 
-expdp cW51/cw schemas=GW51 directory=backupdir dumpfile=GW51_$BAKUPTIME.dmp logfile=GW51_$BAKUPTIME.log exclude=table:\"like \'VT%\'\",statistics parallel=1
+expdp cW51/cw schemas=GW51 directory=databack dumpfile=GW51_$BAKUPTIME.dmp logfile=GW51_$BAKUPTIME.log exclude=table:\"like \'VT%\'\",statistics parallel=1
 echo "Delete the file bakup before 7 days..."
 
 rm -rf $DATA_DIR/GW51_$DELTIME*.dmp
@@ -70,3 +70,8 @@ crontab -u oracle -e
 例如：* 3,13,18 * * * /home/bakup/bakup.sh，即每天3点、13点、18点进行备份。
 说明：文件备份目录，用户oracle必须有更改权限，否则无法备份。
 ------------------------------------------------------------------------------------------------------------------
+
+
+3.附录
+
+create or replace directory databack as '/databack';
