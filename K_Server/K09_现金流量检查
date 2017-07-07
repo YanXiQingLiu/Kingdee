@@ -18,7 +18,7 @@
       
       进入企业建模—辅助数据—财务会计数据—币别
       使用ctrl+shift+Q，输入管理员密码，进入查询分析器
-
+      http://ksm.kingdee.com:8000/login.jsp
       输入语句
       select c.fnumber 公司编码, p.fnumber 期间编码, v.fnumber 凭证编码, ty.fname_l2 凭证类型,cf.* from t_gl_cashflowrecord cf
       inner join t_gl_voucherentry en on cf.fentryid = en.fid 
@@ -40,4 +40,8 @@
       3.如以上两个都还是不平衡，则使用快捷键的方法查询是否有凭证指定不正确的。
       4.如以上三个条件都还是不平衡，则使用脚本来查找出凭证。
      
+
+
+用户名：ag_zhiyin
+密码：jiameng8410
       
