@@ -1,0 +1,14 @@
+
+
+SQL> startup pfile=/home/oracle/init_eas.ora
+ORACLE instance started.
+
+Total System Global Area 2.6991E+10 bytes
+Fixed Size		    2213976 bytes
+Variable Size		 1.9059E+10 bytes
+Database Buffers	 7784628224 bytes
+Redo Buffers		  145174528 bytes
+Database mounted.
+Database opened.
+SQL> create spfile from pfile='/home/oracle/init_eas.ora';
+
