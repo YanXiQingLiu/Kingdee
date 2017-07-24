@@ -1,8 +1,8 @@
 select * from t_gl_voucher where fid='s7EAAAAahDEmUuAe' 
 select * from t_gl_voucherentry where fbillid='s7EAAAAahDEmUuAe' 
-select * from  T_GL_VoucherAssistRecord where fbillid='s7EAAAAahDEmUuAe'
-select * from  T_BD_AsstAccount 
-select * from  T_BD_AssistantHG
+select * from  T_GL_VoucherAssistRecord where fbillid='s7EAAAAahDEmUuAe'   （FASSGRPID）
+select * from  T_BD_AsstAccount    （）
+select * from  T_BD_AssistantHG    （）
 
 ——————————————————————————————————————————————
 主表、实体表、辅助账基本表、辅助账类型表、辅助账横表
