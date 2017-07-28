@@ -15,3 +15,10 @@ select value from v$parameter where name = 'processes';    --数据库允许的�
 select value from v$parameter where name = 'sessions';    --数据库允许的最大会话数
 
 create pfile='G:\AGBP.ora'from spfile;    --备份spfile文件为pfile文件 
+
+
+
+
+http://blog.itpub.net/24585765/viewspace-1063598/
+http://blog.csdn.net/u010719917/article/details/53434782
+
