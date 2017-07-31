@@ -31,6 +31,22 @@ rar a %rarfile%.rar %dumpfile%.*  -df
 
 
 
+--------------------------自动删除15天前的rar文件----------------------------------------------------------------------
+@echo off
+set filename=G:\ora_bak\%date:~3,2%%date:~6,2%
+set dumpfile=G:\ora_bak\agbpeas%date:~3,2%%date:~6,2%
+set dumpfile2=agbpeas%date:~3,2%%date:~6,2%
+
+set rarfile=G:\ora_bak\%date:~3,2%%date:~6,2%%date:~9,2%
+
+expdp system/system directory=dmp1 schemas=agbpeas dumpfile=%dumpfile2%.dmp logfile=%dumpfile2%.log
+rem del %rarfile%.rar
+rar a %rarfile%.rar %dumpfile%.*  -df
+forfiles /p "G:\ora_bak" /m *.rar /d -15 /c "cmd /c del @file" 
+
+------------------------------------------------------------------------------------------------------------
+
+
 
 
 
