@@ -1,0 +1,12 @@
+折旧生成的凭证删除报错的分析与处理
+
+——报错——————————————————————————————————————————————————————————————————————————————————————
+MissingRecord:FaDepreciation id = 'I/QAAAByaar9R8KR'  AIS:T01 username:user
+————————————————————————————————————————————————————————————————————————————————————————————
+
+此类问题是由于固定资产折旧表记录找不到导致，备份并删除关联关系表即可：
+第一步：--备份
+select * into bak20170721_botrelation from t_bot_relation where fsrcobjectid='报错的id'
+第二步--删除
+delete from t_bot_relation where fid in(select fid from bak20170721_botrelation) --上一步的备份表名
+第三步：删除原来的凭证，然后重新折旧计提---折旧维护---审核---生成凭证
