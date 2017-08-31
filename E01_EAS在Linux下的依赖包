@@ -1,0 +1,103 @@
+----X86系统（32位）--------------------------------------
+Red Hat Enterprise Linux 4要求： 
+binutils-2.15.92.0.2-10.EL4 
+compat-db-4.1.25-9 
+compat-libstdc++-296-2.96-132.7.2 
+compat-libstdc++-33-3.2.3-47.3 
+control-center-2.8.0-12 
+gcc-3.4.3-9.EL4 
+gcc-c++-3.4.3-9.EL4 
+glibc-2.3.4-2 
+glibc-common-2.3.4-2 
+gnome-libs-1.4.1.2.90-44.1 
+libstdc++-3.4.3-9.EL4 
+libstdc++-devel-3.4.3-9.EL4 
+make-3.80-5 
+pdksh-5.2.14-30 
+sysstat-5.0.5-1 
+xscreensaver-4.18-5.rhel4.2 
+openmotif21-2.1.30-11.RHEL4.2 (required to install Oracle demos) 
+libaio-0.3.102-1 
+
+Red Hat Enterprise Linux 5.0 要求：
+gcc-c++-4.1.1-52.el5.i386.rpm 
+gcc-4.1.1-52.el5.i386.rpm 
+libstdc++-devel-4.1.1-52.el5.i386.rpm 
+glibc-devel-2.5-12.i386.rpm 
+glibc-headers-2.5-12.i386.rpm 
+libgomp-4.1.1-52.el5.i386.rpm 
+libXp-1.0.0-8.i386.rpm 
+compat-gcc-34-3.4.6-4.i386rpm 
+compat-gcc-c++-34-3.4.6-4.i386rpm 
+compat-libstdc++-33-3.2.3-61.i386.rpm 
+
+SuSE Linux Enterprise Server 10要求: 
+glibc-devel-2.4-31.2.i586.rpm 
+gcc-4.1.0-28.4.i586.rpm 
+libstdc++-devel-4.1.0-28.4.i586.rpm 
+gcc-c++-4.1.0-28.4.i586.rpm 
+libaio-devel-0.3.104-14.2.i586.rpm 
+
+
+----X86系统（64位）----------------------------------------------------
+Red Hat Enterprise Linux 4要求： 
+binutils-2.15.92.0.2-13.0.0.0.2.x86_64 或者安装Update3的 binutils-2.15.92.0.2-18.x86_64.rpm 
+compat-db-4.1.25-9.x86_64.rpm 
+compat-gcc-32-c++ 
+compat-libstdc++-33-3.2.3-47.3.x86_64.rpm 
+compat-libstdc++-33-3.2.3-47.3.i386.rpm 
+control-center-2.8.0-12.x86_64.rpm 
+gcc-3.4.3-47.x86_64.rpm 
+gcc-c++-3.4.3-47.x86_64.rpm 
+glibc-2.3.4-2.9.x86_64.rpm 
+glibc-2.3.4-2.9.i386.rpm 
+glibc-common-2.3.4-2.9.x86_64.rpm 
+glibc-devel-2.3.4-2.9.x86_64.rpm 
+glibc-devel-2.3.4-2.9.i386.rpm 
+glibc-headers-2.3.4-2.9.x86_64.rpm 
+glibc-kernheaders-2.4-9.1.87.x86_64.rpm 
+gnome-libs-1.4.1.2.90-44.1.x86_64 
+libaio-0.3.103-3.i386.rpm 
+libaio-0.3.103-3.x86_64.rpm 
+libgcc-3.4.3-9.EL4 
+libstdc++-3.4.3-22.1.x86_64 
+libstdc++-devel-3.4.3-22.1.x86_64 
+make-3.80-5.x86_64.rpm 
+pdksh-5.2.14-30.x86_64.rpm 
+sysstat-5.0.5-1.x86_64.rpm 
+util-linux-2.12a-16.EL4.23.x86_64 (for raw devices) 
+xorg-x11-deprecated-libs-6.8.1-23 
+xscreensaver-4.18-5.rhel4.2.x86_64.rpm 
+
+Red Hat Enterprise Linux 5.0 要求：
+compat-gcc-34-3.4.6-4 
+compat-gcc-34-c++-3.4.6-4 
+compat-libstdc++-33-3.2.3-61.i386.rpm 
+compat-libstdc++-33-3.2.3-61.x86_64.rpm 
+gcc-c++-4.1.1-52.el5.x86_64.rpm 
+libstdc++-devel-4.1.1-52.el5.x86_64.rpm 
+glibc-headers-2.5-12.x86_64.rpm 
+glibc-devel-2.5-12.i386.rpm 
+glibc-devel-2.5-12.x86_64.rpm 
+libgomp-4.1.1-52.el5.x86_64.rpm 
+gcc-4.1.1-52.el5.x86_64.rpm 
+libXp-1.0.0-8.i386.rpm 
+sysstat-7.0.0-3.el5.x86_64.rpm 
+util-linux-2.13-0.44.el5.x86_64 (for raw devices)  
+
+
+----REHL6.5(CentOS或Oracle Linux6.5)x64系统需要安装的32位包------------------
+compat-libstdc++-33-3.2.3-69.el6.i686.rpm
+expat-2.0.1-11.el6_2.i686.rpm
+fontconfig-2.8.0-3.el6.i686.rpm
+freetype-2.3.11-14.el6_3.1.i686.rpm
+libstdc++-4.4.7-4.el6.i686.rpm
+libX11-1.5.0-4.el6.i686.rpm
+libXau-1.0.6-4.el6.i686.rpm
+libxcb-1.8.1-1.el6.i686.rpm
+libXext-1.3.1-2.el6.i686.rpm
+libXft-2.3.1-2.el6.i686.rpm
+libXi-1.6.1-3.el6.i686.rpm
+libXrender-0.9.7-2.el6.i686.rpm
+libXtst-1.2.1-2.el6.i686.rpm
+-------------------------------------------------------------------------------
