@@ -46,3 +46,16 @@ sql>create directory bakdir as '/home/oracle/OracleAutoBackUp';
 sql>grant read,write on directory bakdir to system;
 
 expdp system/system schemas=GW51 directory=backupdir dumpfile=easGW501_20170617.dmp logfile=easGW501_20170617.log exclude=table:\"like \'VT%\'\",statistics
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+1.
+create temporary tablespace wxh_T tempfile 'E:\Oracle\TabelSpaces\wxh_T.ora' size 500m autoextend on next 500m maxsize UNLIMITED extent management local;
+2.
+create tablespace wxh_D logging datafile 'E:\Oracle\TabelSpaces\wxh_D.ora' size 500m autoextend on next 500m maxsize UNLIMITED extent management local;
+3.
+create user wxh identified by wxh default tablespace wxh_D temporary tablespace wxh_T; 
+4.
+grant connect,resource,dba to wxh;
