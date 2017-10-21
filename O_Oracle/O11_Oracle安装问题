@@ -1,0 +1,10 @@
+网上很多同样错误，都是让共享下C盘啥的，结果照着做了，没啥用。。
+废了老半天劲也没搞定，于是在metalink上搜了下，
+咳咳，第一篇文章就是我所遇到的问题：
+Bug 21452473  Windows: INS-30131 while Installing 12.1.0.2 Database/Client on Windows
+
+
+针对客户端安装，在cmd中执行命令；
+setup.exe -ignorePrereq -J"-Doracle.install.client.validate.clientSupportedOSCheck=false" 
+针对服务端安装，在cmd中执行命令：
+setup.exe -ignorePrereq -J"-Doracle.install.db.validate.supportedOSCheck=false"
